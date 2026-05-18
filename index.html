@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Crystal Works</title>
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background: #ece1c7;
+      color: #1e1a17;
+      font-family: 'Inter', sans-serif;
+      overflow-x: hidden;
+      background-image:
+        radial-gradient(rgba(0,0,0,0.05) 1px, transparent 1px);
+      background-size: 7px 7px;
+    }
+
+    .grain {
+      position: fixed;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      opacity: 0.08;
+      background-image: url('https://www.transparenttextures.com/patterns/asfalt-dark.png');
+      z-index: 999;
+    }
+
+    .hero {
+      min-height: 100vh;
+      padding: 80px 8%;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 60px;
+    }
+
+    .retro-lines {
+      position: absolute;
+      left: 4%;
+      top: 0;
+      width: 320px;
+      height: 100%;
+      display: flex;
+      gap: 0;
+      opacity: 0.9;
+      z-index: 0;
+    }
+
+    .retro-lines span {
+      width: 55px;
+      height: 75%;
+      clip-path: polygon(0 0,100% 0,100% 70%,70% 100%,0 100%);
+    }
+
+    .retro-lines span:nth-child(1) { background: #5e8784; }
+    .retro-lines span:nth-child(2) { background: #9fb1a0; }
+    .retro-lines span:nth-child(3) { background: #d2c89d; }
+    .retro-lines span:nth-child(4) { background: #d88c67; }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 700px;
+      margin-left: 280px;
+    }
+
+    .tag {
+      display: inline-block;
+      background: #1f1b18;
+      color: #f5f0e5;
+      padding: 8px 14px;
+      font-size: 12px;
+      letter-spacing: 2px;
+      margin-bottom: 25px;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      font-family: 'Anton', sans-serif;
+      font-size: 8rem;
+      line-height: 0.9;
+      letter-spacing: 2px;
+      margin-bottom: 30px;
+      text-transform: uppercase;
+    }
+
+    .hero p {
+      max-width: 550px;
+      line-height: 1.8;
+      font-size: 1rem;
+      color: #3f3935;
+      margin-bottom: 30px;
+    }
+
+    .buttons {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      text-decoration: none;
+      padding: 14px 28px;
+      border: 2px solid #1f1b18;
+      color: #1f1b18;
+      font-weight: 700;
+      transition: 0.25s ease;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .btn:hover {
+      background: #1f1b18;
+      color: #ece1c7;
+      transform: translateY(-4px);
+    }
+
+    .logo-box {
+      position: relative;
+      z-index: 2;
+      background: #2e2528;
+      border-radius: 30px;
+      padding: 30px;
+      box-shadow: 0 25px 60px rgba(0,0,0,0.2);
+      transform: rotate(-4deg);
+    }
+
+    .logo-box img {
+      width: 380px;
+      display: block;
+    }
+
+    section {
+      padding: 120px 8%;
+      position: relative;
+    }
+
+    .section-title {
+      font-family: 'Anton', sans-serif;
+      font-size: 6rem;
+      line-height: 0.9;
+      margin-bottom: 40px;
+      text-transform: uppercase;
+    }
+
+    .portfolio-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit,minmax(280px,1fr));
+      gap: 28px;
+      margin-top: 50px;
+    }
+
+    .card {
+      background: rgba(255,255,255,0.35);
+      border: 2px solid rgba(0,0,0,0.1);
+      padding: 28px;
+      min-height: 320px;
+      transition: 0.25s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card::before {
+      content: '';
+      position: absolute;
+      width: 100%;
+      height: 8px;
+      left: 0;
+      top: 0;
+      background: linear-gradient(90deg,#5e8784,#d2c89d,#d88c67);
+    }
+
+    .card:hover {
+      transform: translateY(-10px) rotate(-1deg);
+      box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+    }
+
+    .card h3 {
+      font-family: 'Anton', sans-serif;
+      font-size: 2.2rem;
+      margin-bottom: 18px;
+      text-transform: uppercase;
+      line-height: 1;
+    }
+
+    .card p {
+      line-height: 1.8;
+      color: #403833;
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(auto-fit,minmax(220px,1fr));
+      gap: 24px;
+      margin-top: 60px;
+    }
+
+    .stat {
+      padding: 35px;
+      background: #1f1b18;
+      color: #f5f0e5;
+    }
+
+    .stat h2 {
+      font-family: 'Anton', sans-serif;
+      font-size: 4rem;
+      line-height: 1;
+      margin-bottom: 10px;
+    }
+
+    .showcase {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 50px;
+      align-items: center;
+    }
+
+    .showcase-box {
+      background: #2e2528;
+      color: white;
+      padding: 50px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .showcase-box::after {
+      content: '';
+      position: absolute;
+      right: -60px;
+      bottom: -60px;
+      width: 180px;
+      height: 180px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.08);
+    }
+
+    .showcase-box h3 {
+      font-family: 'Anton', sans-serif;
+      font-size: 4rem;
+      line-height: 0.95;
+      margin-bottom: 25px;
+      text-transform: uppercase;
+    }
+
+    .showcase-box p {
+      line-height: 1.9;
+      color: rgba(255,255,255,0.8);
+    }
+
+    .timeline {
+      display: flex;
+      flex-direction: column;
+      gap: 30px;
+    }
+
+    .step {
+      border-left: 5px solid #1f1b18;
+      padding-left: 24px;
+    }
+
+    .step h4 {
+      font-family: 'Anton', sans-serif;
+      font-size: 2rem;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+
+    .contact {
+      background: #1f1b18;
+      color: #f5f0e5;
+      text-align: center;
+    }
+
+    .contact p {
+      max-width: 700px;
+      margin: 0 auto 35px;
+      line-height: 1.8;
+      color: rgba(255,255,255,0.8);
+    }
+
+    .contact-box {
+      display: inline-block;
+      padding: 18px 35px;
+      border: 2px solid rgba(255,255,255,0.2);
+      font-size: 1.3rem;
+      letter-spacing: 2px;
+      margin-top: 20px;
+    }
+
+    footer {
+      padding: 25px;
+      text-align: center;
+      font-size: 0.9rem;
+      background: #171311;
+      color: rgba(255,255,255,0.6);
+    }
+
+    @media(max-width: 1100px) {
+      .hero {
+        flex-direction: column;
+        justify-content: center;
+        padding-top: 140px;
+      }
+
+      .hero-content {
+        margin-left: 0;
+      }
+
+      .retro-lines {
+        opacity: 0.25;
+      }
+
+      .showcase {
+        grid-template-columns: 1fr;
+      }
+
+      h1 {
+        font-size: 5rem;
+      }
+
+      .section-title {
+        font-size: 4rem;
+      }
+    }
+
+    @media(max-width: 700px) {
+      h1 {
+        font-size: 3.8rem;
+      }
+
+      .section-title {
+        font-size: 3rem;
+      }
+
+      .logo-box img {
+        width: 100%;
+      }
+
+      .logo-box {
+        width: 100%;
+      }
+
+      .hero {
+        padding-inline: 20px;
+      }
+
+      section {
+        padding-inline: 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<div class="grain"></div>
+
+<section class="hero">
+  <div class="retro-lines">
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+
+  <div class="hero-content">
+    <div class="tag">Crystal Works Cinematic Studio</div>
+    <h1>We Create Cinematic Minecraft Experiences.</h1>
+    <p>
+      Crystal Works helps Minecraft creators, servers, and communities transform their projects into immersive cinematic worlds. From dramatic trailers and atmospheric visuals to custom UI design and stylized branding, we build experiences that feel alive.
+    </p>
+
+    <div class="buttons">
+      <a href="#portfolio" class="btn">View Projects</a>
+      <a href="#contact" class="btn">Work With Us</a>
+    </div>
+  </div>
+
+  <div class="logo-box">
+    <img src="Crystal works.png" alt="Crystal Works Logo">
+  </div>
+</section>
+
+<section id="portfolio">
+  <div class="tag">Featured Work</div>
+  <h2 class="section-title">Portfolio.</h2>
+
+  <div class="portfolio-grid">
+    <div class="card">
+      <h3>Cinematic Trailers</h3>
+      <p>
+        We direct and edit high-end Minecraft trailers with dynamic camera movements, dramatic color grading, synchronized music, and storytelling that feels like a real movie experience.
+      </p>
+    </div>
+
+    <div class="card">
+      <h3>Custom Client Design</h3>
+      <p>
+        Crystal Works creates sleek Minecraft launchers, immersive menus, cinematic overlays, and modern interfaces that make your client feel polished and premium.
+      </p>
+    </div>
+
+    <div class="card">
+      <h3>World Atmosphere</h3>
+      <p>
+        We help servers and creators craft unforgettable environments with shaders, lighting concepts, scene composition, and visual storytelling tailored for immersion.
+      </p>
+    </div>
+  </div>
+
+  <div class="stats">
+    <div class="stat">
+      <h2>120+</h2>
+      <span>Visual Concepts Created</span>
+    </div>
+
+    <div class="stat">
+      <h2>4K</h2>
+      <span>Cinematic Rendering Support</span>
+    </div>
+
+    <div class="stat">
+      <h2>24/7</h2>
+      <span>Creative Collaboration</span>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="showcase">
+    <div class="showcase-box">
+      <h3>Why Crystal Works?</h3>
+      <p>
+        We combine cinematic editing, graphic design, and Minecraft creativity into one complete production studio. Every frame, transition, and animation is crafted to make your project stand out with personality and atmosphere.
+      </p>
+    </div>
+
+    <div class="timeline">
+      <div class="step">
+        <h4>Concept</h4>
+        <p>We develop a visual direction that matches your server, client, or cinematic project.</p>
+      </div>
+
+      <div class="step">
+        <h4>Production</h4>
+        <p>Our team builds scenes, captures footage, and designs immersive visuals with attention to detail.</p>
+      </div>
+
+      <div class="step">
+        <h4>Delivery</h4>
+        <p>We finalize every cinematic piece with polished motion, sound design, and branding-ready presentation.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="contact" id="contact">
+  <div class="tag">Contact Crystal Works</div>
+  <h2 class="section-title">Let's Build Something Cinematic.</h2>
+
+  <p>
+    Whether you're creating a PvP client, a survival network, or a cinematic Minecraft universe, Crystal Works can help turn your ideas into a visually unforgettable experience.
+  </p>
+
+  <div class="contact-box">
+    crystalworksstudios@gmail.com
+  </div>
+</section>
+
+<footer>
+  © 2026 Crystal Works — All Rights Reserved.
+</footer>
+
+</body>
+</html>
